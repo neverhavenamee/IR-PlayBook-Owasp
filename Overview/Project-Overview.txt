@@ -1,0 +1,46 @@
+ir-playbooks-owasp-top10/
+│
+├── README.md                          # Tổng quan dự án
+├── docker-compose.yml                 # Lab setup
+│
+├── docs/
+│   ├── architecture.md                # Kiến trúc lab
+│   ├── threat-models/                 # Threat modeling cho từng vuln
+│   │   ├── sqli-threat-model.md
+│   │   ├── xss-threat-model.md
+│   │   └── idor-threat-model.md
+│   └── references.md                  # Tài liệu tham khảo
+│
+├── playbooks/                         # ⭐ CỐT LÕI CỦA DỰ ÁN
+│   ├── PB-001-SQL-Injection.md
+│   ├── PB-002-XSS.md
+│   ├── PB-003-IDOR.md
+│   └── _template.md                   # Template chuẩn
+│
+├── simulations/                       # Scripts mô phỏng tấn công
+│   ├── sqli/
+│   │   ├── attack-sqli.py
+│   │   └── evidence/
+│   ├── xss/
+│   │   ├── attack-xss.py
+│   │   └── evidence/
+│   └── idor/
+│       ├── attack-idor.py
+│       └── evidence/
+│
+├── detection-rules/                   # Rules cho SIEM
+│   ├── wazuh-rules/
+│   │   ├── sqli-detection.xml
+│   │   ├── xss-detection.xml
+│   │   └── idor-detection.xml
+│   └── sigma-rules/
+│
+├── evaluation/                        # Kết quả đánh giá
+│   ├── metrics-template.xlsx
+│   ├── test-results/
+│   └── evaluation-report.md
+│
+└── scripts/                           # Utility scripts
+    ├── log-collector.sh
+    ├── evidence-packager.py
+    └── metrics-calculator.py

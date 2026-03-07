@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  # ===== 1. Vulnerable Web App: DVWA =====
+  dvwa:
+    image: vulnerables/web-dvwa
+    container_name: dvwa
+    ports:
+      - "8080:80"
+    networks:
+      - ir-lab
+    restart: always
+
+  # ===== 2. Vulnerable Web App: OWASP Juice Shop =====
+  juice-shop:
+    image: bkimminich/juice-shop
+    container_name: juice-shop
+    ports:
+      - "3000:3000"
+    networks:
+      - ir-lab
+    restart: always
+
+  # ===== 3. Wazuh (SIEM + IDS) - All-in-one =====
+  wazuh:
+    image: wazuh/wazuh-odfe:latest
+    container_name: wazuh-manager
+    ports:
+      - "1514:1514/udp"   # Agent communication
+      - "1515:1515"       # Agent registration
+      - "514:514/udp"     # Syslog
+      - "55000:55000"     # Wazuh API
+    networks:
+      - ir-lab
+    restart: always
+
+  # ===== 4. Elasticsearch =====
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.9
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    networks:
+      - ir-lab
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    restart: always
+
+  # ===== 5. Kibana (Dashboard) =====
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.9
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    networks:
+      - ir-lab
+    restart: always
+
+networks:
+  ir-lab:
+    driver: bridge
+
+volumes:
+  es-data:

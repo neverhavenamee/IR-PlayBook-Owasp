@@ -1,0 +1,165 @@
+# IR Playbook: [PB-XXX] - [Vulnerability Name]
+
+## 1. Metadata
+| Field | Value |
+|-------|-------|
+| **Playbook ID** | PB-XXX |
+| **Vulnerability** | [e.g., SQL Injection] |
+| **OWASP Category** | [e.g., A03:2021 - Injection] |
+| **MITRE ATT&CK** | [e.g., T1190 - Exploit Public-Facing Application] |
+| **Severity** | Critical / High / Medium |
+| **Version** | 1.0 |
+| **Last Updated** | YYYY-MM-DD |
+| **Author** | [Team Name] |
+
+---
+
+## 2. Overview
+### 2.1 Description
+[Mô tả ngắn gọn về vulnerability và tại sao cần playbook riêng]
+
+### 2.2 Attack Scenario
+[Mô tả kịch bản tấn công điển hình]
+
+### 2.3 Potential Impact
+- [ ] Data Breach / Data Exfiltration
+- [ ] Account Compromise
+- [ ] Privilege Escalation
+- [ ] Service Disruption
+- [ ] Reputation Damage
+
+---
+
+## 3. Phase 1: Preparation
+### 3.1 Required Tools
+| Tool | Purpose | Location |
+|------|---------|----------|
+| Wazuh | SIEM/IDS | wazuh-manager:55000 |
+| Kibana | Log visualization | localhost:5601 |
+| Burp Suite | Traffic analysis | Local machine |
+
+### 3.2 Pre-configured Detection Rules
+[Liệt kê các detection rules đã cài sẵn]
+
+### 3.3 Team Roles
+| Role | Responsibility |
+|------|----------------|
+| Incident Commander | Điều phối tổng thể |
+| Security Analyst | Phân tích log, IOCs |
+| System Admin | Containment, recovery |
+| Communication Lead | Thông báo stakeholders |
+
+---
+
+## 4. Phase 2: Detection & Analysis
+### 4.1 Trigger Conditions (Activation Criteria)
+- [ ] Trigger 1: [e.g., Wazuh alert rule ID 31103 - SQL Injection attempt]
+- [ ] Trigger 2: [e.g., WAF alert for suspicious SQL syntax in request]
+- [ ] Trigger 3: [e.g., Abnormal database query pattern detected]
+
+### 4.2 Indicators of Compromise (IOCs)
+#### Application Layer IOCs
+```
+[Liệt kê cụ thể các IOC patterns]
+```
+
+#### Network Layer IOCs
+```
+[Liệt kê network-based IOCs]
+```
+
+### 4.3 Triage Decision Tree
+```
+Alert received
+    ├── Is it a true positive?
+    │   ├── YES → Assess severity → Go to Phase 3
+    │   └── NO  → Document false positive → Update rules → Close
+    └── Need more info?
+        └── Collect additional logs → Re-assess
+```
+
+### 4.4 Severity Classification
+| Level | Criteria | Response Time |
+|-------|----------|---------------|
+| Critical | Data exfiltration confirmed | Immediate (< 15 min) |
+| High | Active exploitation detected | < 1 hour |
+| Medium | Attempted exploitation, no success | < 4 hours |
+| Low | Reconnaissance/scanning only | < 24 hours |
+
+---
+
+## 5. Phase 3: Containment
+### 5.1 Immediate Containment Actions
+- [ ] Action 1: [e.g., Block attacker IP at WAF/firewall]
+- [ ] Action 2: [e.g., Disable affected user accounts]
+- [ ] Action 3: [e.g., Isolate affected database]
+
+### 5.2 Short-term Containment
+[Các bước containment tạm thời]
+
+### 5.3 Long-term Containment
+[Các bước containment dài hạn]
+
+### 5.4 Containment Verification
+```bash
+# Commands to verify containment effectiveness
+```
+
+---
+
+## 6. Phase 4: Eradication & Recovery
+### 6.1 Root Cause Analysis
+- [ ] Identify vulnerable code/configuration
+- [ ] Trace attack path
+- [ ] Determine data impact scope
+
+### 6.2 Eradication Steps
+- [ ] Step 1: [e.g., Patch vulnerable code]
+- [ ] Step 2: [e.g., Update WAF rules]
+- [ ] Step 3: [e.g., Reset compromised credentials]
+
+### 6.3 Recovery Steps
+- [ ] Step 1: [e.g., Restore database from clean backup]
+- [ ] Step 2: [e.g., Verify system integrity]
+- [ ] Step 3: [e.g., Re-enable services]
+- [ ] Step 4: [e.g., Monitor for re-exploitation]
+
+### 6.4 Recovery Verification Checklist
+- [ ] All vulnerabilities patched
+- [ ] No active IOCs detected
+- [ ] System performance normal
+- [ ] User access restored
+
+---
+
+## 7. Phase 5: Post-Incident Activities
+### 7.1 Evidence Preservation
+| Evidence Type | Location | Collected? |
+|---------------|----------|------------|
+| Web server access logs | /var/log/nginx/ | ☐ |
+| Application logs | /var/log/app/ | ☐ |
+| Database query logs | /var/log/mysql/ | ☐ |
+| Session/Token data | Application DB | ☐ |
+| Network captures | PCAP files | ☐ |
+
+### 7.2 Lessons Learned
+| Question | Answer |
+|----------|--------|
+| What happened? | |
+| When was it detected? | |
+| How was it contained? | |
+| What was the root cause? | |
+| What can be improved? | |
+
+### 7.3 Playbook Updates
+[Ghi nhận các thay đổi cần cập nhật cho playbook]
+
+---
+
+## 8. Appendix
+### 8.1 Related Playbooks
+### 8.2 Reference Documents
+### 8.3 Change Log
+| Version | Date | Author | Changes |
+|---------|------|--------|---------|
+| 1.0 | YYYY-MM-DD | | Initial version |
